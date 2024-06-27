@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/theme.dart';
 import '/ui/page/home/widget/app_bar.dart';
 import 'controller.dart';
-import 'widget/document.dart';
+import 'tab/documents.dart';
+import 'tab/terms.dart';
 import 'widget/outlined_button.dart';
 
 class DocumentsTab extends StatelessWidget {
@@ -11,6 +13,8 @@ class DocumentsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Style style = Theme.of(context).extension<Style>()!;
+
     return GetBuilder(
       init: DocumentsTabController(),
       builder: (c) {
@@ -25,28 +29,45 @@ class DocumentsTab extends StatelessWidget {
                   height: 40,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: PrimaryOutlinedButton(
-                            onPressed: () {},
-                            child: const Text('Документи'),
+                    child: Obx(() {
+                      return Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8, left: 16),
+                            child: PrimaryOutlinedButton(
+                              onPressed: () => c.animateToPage(0),
+                              selected: c.page.value == 0,
+                              child: Text(
+                                'Документи',
+                                style: style.fonts.xsSemiBold,
+                              ),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: PrimaryOutlinedButton(
-                            onPressed: () {},
-                            child: const Text('Посадова інструкція'),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: PrimaryOutlinedButton(
+                              onPressed: () => c.animateToPage(1),
+                              selected: c.page.value == 1,
+                              child: Text(
+                                'Посадова інструкція',
+                                style: style.fonts.xsSemiBold,
+                              ),
+                            ),
                           ),
-                        ),
-                        PrimaryOutlinedButton(
-                          onPressed: () {},
-                          child: const Text('Умови співпраці'),
-                        ),
-                      ],
-                    ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child: PrimaryOutlinedButton(
+                              onPressed: () => c.animateToPage(2),
+                              selected: c.page.value == 2,
+                              child: Text(
+                                'Умови співпраці',
+                                style: style.fonts.xsSemiBold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -54,43 +75,17 @@ class DocumentsTab extends StatelessWidget {
             Expanded(
               child: PageView(
                 controller: c.pageController,
+                onPageChanged: (i) => c.page.value = i,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      const Text('Трудовий договір'),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      const Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, '),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      Expanded(
-                        child: GridView.builder(
-                          itemCount: c.documents.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 24
-                          ),
-                          itemBuilder: (_, i) {
-                            return DocumentView(c.documents[i]);
-                          },
-                        ),
-                      ),
-                    ],
+                  DocumentsView(
+                    title: 'Трудовий договір',
+                    documents: c.documents,
                   ),
-                  Container(
-                    color: Colors.green,
+                  DocumentsView(
+                    title: 'Посадова інструкція',
+                    documents: c.instructions,
                   ),
-                  Container(
-                    color: Colors.blue,
-                  ),
+                  const TermsTab(),
                 ],
               ),
             ),
