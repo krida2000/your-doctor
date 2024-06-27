@@ -13,7 +13,7 @@ class Contact {
   String phone;
 
   String viber;
-  
+
   String photoUrl;
 
   bool verified;

@@ -13,8 +13,8 @@ class HomePageController extends GetxController {
   }
 
   Future<void> animateToPage(int index) => pageController.animateToPage(
-      index,
-      duration: 200.milliseconds,
-      curve: Curves.linear,
-    );
+        index,
+        duration: 200.milliseconds,
+        curve: Curves.linear,
+      );
 }
