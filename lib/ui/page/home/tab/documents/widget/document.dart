@@ -53,12 +53,10 @@ class DocumentView extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Text(document.name, style: style.fonts.xsBold),
+                Text(document.name, style: style.fonts.textXsBoldContract),
                 const SizedBox(height: 4),
                 DefaultTextStyle(
-                  style: style.fonts.xxsMedium.copyWith(
-                    color: const Color(0xFF647067),
-                  ),
+                  style: style.fonts.textXxsMediumOnPrimary,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

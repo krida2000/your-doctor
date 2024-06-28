@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widget/document.dart';
 import '/domain/document.dart';
+import '/theme.dart';
 
 class DocumentsView extends StatelessWidget {
   const DocumentsView({
@@ -16,6 +17,8 @@ class DocumentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Style style = Theme.of(context).extension<Style>()!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -27,19 +30,15 @@ class DocumentsView extends StatelessWidget {
           if (title != null) ...[
             Text(
               title!,
-              style: const TextStyle(
-                color: Color(0xFF2F3C33),
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
+              style: style.fonts.textSBoldContract,
             ),
             const SizedBox(
               height: 12,
             )
           ],
-          const Text(
+          Text(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
-            style: TextStyle(color: Color(0xFF647067)),
+            style: style.fonts.textOnPrimary,
           ),
           const SizedBox(
             height: 24,

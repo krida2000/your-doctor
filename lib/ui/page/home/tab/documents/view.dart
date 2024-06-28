@@ -24,7 +24,7 @@ class DocumentsTab extends StatelessWidget {
             TabAppBar(
               title: 'Документи',
               trailing: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.only(bottom: 14),
                 child: SizedBox(
                   height: 40,
                   child: SingleChildScrollView(
@@ -39,7 +39,7 @@ class DocumentsTab extends StatelessWidget {
                               selected: c.page.value == 0,
                               child: Text(
                                 'Документи',
-                                style: style.fonts.xsSemiBold,
+                                style: style.fonts.textXsSemiBold,
                               ),
                             ),
                           ),
@@ -50,7 +50,7 @@ class DocumentsTab extends StatelessWidget {
                               selected: c.page.value == 1,
                               child: Text(
                                 'Посадова інструкція',
-                                style: style.fonts.xsSemiBold,
+                                style: style.fonts.textXsSemiBold,
                               ),
                             ),
                           ),
@@ -61,7 +61,7 @@ class DocumentsTab extends StatelessWidget {
                               selected: c.page.value == 2,
                               child: Text(
                                 'Умови співпраці',
-                                style: style.fonts.xsSemiBold,
+                                style: style.fonts.textXsSemiBold,
                               ),
                             ),
                           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '/theme.dart';
+
 class TabAppBar extends StatelessWidget {
   const TabAppBar({super.key, required this.title, this.trailing});
 
@@ -9,6 +11,8 @@ class TabAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Style style = Theme.of(context).extension<Style>()!;
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -22,16 +26,16 @@ class TabAppBar extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 34),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 16),
               child: Text(
                 title,
-                style: const TextStyle(fontSize: 32),
+                style: style.fonts.headlineSBoldContracten,
                 maxLines: 2,
               ),
             ),
-            if (trailing != null) trailing!,
+            if (trailing != null) ...[const SizedBox(height: 24), trailing!],
             const SizedBox(height: 10),
           ],
         ),
