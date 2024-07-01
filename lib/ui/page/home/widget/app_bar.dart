@@ -3,23 +3,31 @@ import 'package:flutter/material.dart';
 import '/theme.dart';
 
 class TabAppBar extends StatelessWidget {
-  const TabAppBar({super.key, required this.title, this.trailing});
+  const TabAppBar({
+    super.key,
+    required this.title,
+    this.trailing,
+    this.background,
+  });
 
   final String title;
 
   final Widget? trailing;
+
+  final DecorationImage? background;
 
   @override
   Widget build(BuildContext context) {
     final Style style = Theme.of(context).extension<Style>()!;
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(30),
           bottomRight: Radius.circular(30),
         ),
+        image: background,
       ),
       child: SafeArea(
         child: Column(
@@ -35,7 +43,7 @@ class TabAppBar extends StatelessWidget {
                 maxLines: 2,
               ),
             ),
-            if (trailing != null) ...[const SizedBox(height: 24), trailing!],
+            if (trailing != null) ...[const SizedBox(height: 16), trailing!],
             const SizedBox(height: 10),
           ],
         ),

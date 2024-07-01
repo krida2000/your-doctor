@@ -47,7 +47,7 @@ class _DocumentsTabState extends State<DocumentsTab>
       init: DocumentsTabController(),
       builder: (c) {
         return Container(
-          color: const Color(0xFFEFEFF0),
+          color: style.colors.primaryBackground,
           child: Column(children: [
             TabAppBar(
               title: 'Документи',

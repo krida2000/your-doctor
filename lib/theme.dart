@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 class Style extends ThemeExtension<Style> {
   Style._({
     required this.fonts,
-    required this.palette,
+    required this.colors,
   });
 
   Style.light({
-    this.palette = const Palette.light(),
+    this.colors = const Palette.light(),
   }) {
     fonts = Fonts(
-      onPrimary: palette.onPrimary,
-      onPrimaryContract: palette.onPrimaryContract,
-      onPrimaryContracten: palette.onPrimaryContracten,
+      onPrimary: colors.onPrimary,
+      onPrimaryContract: colors.onPrimaryContract,
+      onPrimaryContracten: colors.onPrimaryContracten,
     );
   }
 
   late final Fonts fonts;
 
-  final Palette palette;
+  final Palette colors;
 
   @override
   ThemeExtension<Style> copyWith({Fonts? fonts, Palette? palette}) {
     return Style._(
       fonts: fonts ?? this.fonts,
-      palette: palette ?? this.palette,
+      colors: palette ?? this.colors,
     );
   }
 
@@ -36,7 +36,7 @@ class Style extends ThemeExtension<Style> {
 
     return Style._(
       fonts: fonts.lerp(other.fonts, t),
-      palette: palette.lerp(other.palette, t),
+      colors: colors.lerp(other.colors, t),
     );
   }
 }
@@ -70,6 +70,12 @@ class Fonts {
     fontWeight: FontWeight.w700,
   );
 
+  late final TextStyle textXsRegular = const TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+  );
+
   final TextStyle textXsBold = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 14,
@@ -98,6 +104,10 @@ class Fonts {
 
   late final TextStyle textSBoldContract = textSBold.copyWith(
     color: _onPrimaryContract,
+  );
+
+  late final TextStyle textXsRegularOnPrimary = textXsRegular.copyWith(
+    color: _onPrimary,
   );
 
   late final TextStyle textXsBoldContract = textXsBold.copyWith(
@@ -131,6 +141,7 @@ class Palette {
     required this.onPrimary,
     required this.onPrimaryContract,
     required this.onPrimaryContracten,
+    required this.textFieldBackground,
   });
 
   const Palette.light({
@@ -139,6 +150,7 @@ class Palette {
     this.onPrimary = const Color(0xFF647067),
     this.onPrimaryContract = const Color(0xFF2F3C33),
     this.onPrimaryContracten = const Color(0xFF111A14),
+    this.textFieldBackground = const Color(0xFFF5F5F5),
   });
 
   final Color primaryBackground;
@@ -150,6 +162,8 @@ class Palette {
   final Color onPrimaryContract;
 
   final Color onPrimaryContracten;
+
+  final Color textFieldBackground;
 
   Palette lerp(Palette? other, double t) {
     if (other is! Palette) {
@@ -166,6 +180,8 @@ class Palette {
           Color.lerp(onPrimaryContract, other.onPrimaryContract, t)!,
       onPrimaryContracten:
           Color.lerp(onPrimaryContracten, other.onPrimaryContracten, t)!,
+      textFieldBackground:
+          Color.lerp(textFieldBackground, other.textFieldBackground, t)!,
     );
   }
 }
